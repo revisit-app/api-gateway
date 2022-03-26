@@ -11,8 +11,9 @@ public class GatewaySecurityConfig {
   @Bean
   public SecurityWebFilterChain securityWebFilterChain(ServerHttpSecurity http) {
     http.authorizeExchange()
-        .anyExchange()
+        .pathMatchers("/decks", "/decks/saved", "/cards", "/cards/saved")
         .authenticated()
+        .pathMatchers("/users/**", "/decks/**", "/cards/**").permitAll()
         .and()
         .oauth2ResourceServer()
         .jwt();
